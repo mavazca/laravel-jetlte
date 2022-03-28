@@ -1,18 +1,18 @@
 @props(['id', 'maxWidth', 'modal' => false])
 
 @php
-$id = $id ?? md5($attributes->wire('model'));
+    $id = $id ?? md5($attributes->wire('model'));
 
-$maxWidth = [
-    'sm' => ' modal-sm',
-    'md' => '',
-    'lg' => ' modal-lg',
-    'xl' => ' modal-xl',
-][$maxWidth ?? 'md'];
+    $maxWidth = [
+        'sm' => ' modal-sm',
+        'md' => '',
+        'lg' => ' modal-lg',
+        'xl' => ' modal-xl',
+    ][$maxWidth ?? 'md'];
 @endphp
 
 <!-- Modal -->
-<div 
+<div
     x-data="{
         show: @entangle($attributes->wire('model')).defer,
         focusables() {
@@ -43,7 +43,7 @@ $maxWidth = [
         modal.on('hide.bs.modal', function () {
             show = false
         })
-        
+
         modal.click(function(e) {
             if (e.target == this) {
                 show = false;
@@ -53,10 +53,10 @@ $maxWidth = [
     x-on:keydown.escape.window="show = false"
     x-on:keydown.tab.prevent="$event.shiftKey || nextFocusable().focus()"
     x-on:keydown.shift.tab.prevent="prevFocusable().focus()"
-    wire:ignore.self 
-    class="modal fade" 
-    id="{{ $id }}" 
-    aria-labelledby="{{ $id }}" 
+    wire:ignore.self
+    class="modal fade"
+    id="{{ $id }}"
+    aria-labelledby="{{ $id }}"
     aria-hidden="true"
     x-ref="{{ $id }}"
 >
